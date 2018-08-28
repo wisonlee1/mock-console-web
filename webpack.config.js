@@ -1,9 +1,16 @@
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
   mode: 'development',
   entry: './index.js',
   output: {
     path: `${__dirname}/build`,
     filename: 'bundle.js',
+  },
+  devServer: {
+    port: 9000,
+    compress: true,
   },
   module: {
     rules: [
@@ -31,5 +38,10 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'pages/index.ejs'
+    })
+  ]
 }
