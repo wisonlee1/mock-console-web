@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server/src/server.js",
     "build": "webpack",
-    "dev-server": "webpack-dev-server"
+    "dev": "webpack-dev-server"
   },
   "dependencies": {
     "ejs": "^2.6.1",
