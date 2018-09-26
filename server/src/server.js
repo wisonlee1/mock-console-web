@@ -24,4 +24,8 @@ app.get('/api/test2', (req, res, next) => {
   res.send('hello2')
 })
 
+app.get('*', (req, res) => {
+  res.render('index')
+})
+
 app.listen('8080')
