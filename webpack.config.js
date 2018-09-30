@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const cleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -31,6 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new cleanWebpackPlugin(['build/*.*']),
     new HtmlWebpackPlugin({
       template: 'pages/index.ejs'
     }),
