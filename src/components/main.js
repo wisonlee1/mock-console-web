@@ -24,7 +24,8 @@ class Main extends React.Component {
           getComponents(location, cb) {
             require.ensure([], require => {
               // https://github.com/gaearon/react-hot-loader/issues/288#issuecomment-245988695
-              cb(null, require('./pipeline').default);
+              console.log(require('@caicloud/compass-devops'));
+              cb(null, require('@caicloud/compass-devops').default);
             });
           },
         }
