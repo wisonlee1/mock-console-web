@@ -46,6 +46,22 @@ class Main extends React.Component {
             })
           }
         },
+        {
+          path: 'require-multiple-export-default',
+          getComponents(location, cb) {
+            require.ensure([], require => {
+              cb(null, require('./dynamic-multiple-export').default)
+            })
+          }
+        },
+        {
+          path: 'require-multiple-export-normal',
+          getComponents(location, cb) {
+            require.ensure([], require => {
+              cb(null, require('./dynamic-multiple-export').DynamicExport)
+            })
+          }
+        },
         // {
         //   path: 'import-module',
         //   getComponents(location, cb) {
