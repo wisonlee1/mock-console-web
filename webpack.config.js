@@ -4,10 +4,14 @@ const cleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-  entry: './index.js',
+  entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
+    './index.js',
+  ],
   output: {
     path: `${__dirname}/build`,
     filename: 'bundle.js',
+    publicPath: `/build/`, // publicPath 一定以 / 结束
   },
   devServer: {
     port: 9000,
@@ -25,7 +29,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['react-hot-loader/babel'],
           }
         }
       },
@@ -37,5 +42,6 @@ module.exports = {
       template: 'pages/index.ejs'
     }),
     new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ]
 }

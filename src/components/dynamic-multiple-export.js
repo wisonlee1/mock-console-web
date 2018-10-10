@@ -11,7 +11,7 @@ const DynamicDefault = () => {
 const DynamicExport = () => {
   return (
     <div>
-      DynamicExport      
+      DynamicExport
     </div>
   )
 }
