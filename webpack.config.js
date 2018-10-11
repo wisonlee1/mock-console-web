@@ -6,7 +6,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true',
-    './index.js',
+    './index.js'
   ],
   output: {
     path: `${__dirname}/build`,

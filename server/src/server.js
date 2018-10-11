@@ -9,7 +9,7 @@ const compiler = webpack(webpackConfig)
 app.set('views', './pages/')
 app.set('view engine', 'ejs')
 // 用了 webpack-dev-middleware 后，不需要设置这个了
-// app.use(express.static('build')) //把运行路径下的build给开放到http://xxx里面。build/bundle.js 到http://xxx/bundle.js
+app.use(express.static('build')) //把运行路径下的build给开放到http://xxx里面。build/bundle.js 到http://xxx/bundle.js
 
 console.log('publicPath',  webpackConfig.output.publicPath);
 
