@@ -1,6 +1,7 @@
 sudo: false
 dist: trusty
-
+services:
+  - docker
 language: node_js
 
 node_js:
@@ -11,8 +12,6 @@ install:
 
 script:
   - yarn test
-  - echo "$DOCKER_PASSWORD"
-  - echo "$DOCKER_USERNAME"
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t mock-console-web-server:latest .
-  - docker push mock-console-web-server:latest
+  - docker build -t artecher/mock-console-web-server:latest .
+  - docker push artecher/mock-console-web-server:latest
