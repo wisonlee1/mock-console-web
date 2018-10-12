@@ -7,8 +7,12 @@ node_js:
   - "10.12.0"
 
 install:
-  - npm install
+  - yarn
 
 script:
-  - npm run test
-  - docker build -t mock-console-web-server .
+  - yarn test
+  - echo "$DOCKER_PASSWORD"
+  - echo "$DOCKER_USERNAME"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t mock-console-web-server:latest .
+  - docker push mock-console-web-server:latest
