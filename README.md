@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/wisonlee1/mock-console-web.svg?branch=master)](https://travis-ci.org/wisonlee1/mock-console-web)
