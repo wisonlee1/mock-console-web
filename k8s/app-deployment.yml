@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mock-console-web
+  template:
+    metadata:
+      labels:
+        app: mock-console-web
+    spec:
+      containers:
+        - name: mock-console-web-server
+          image: artecher/mock-console-web-server
+          ports:
+            - containerPort: 8080
