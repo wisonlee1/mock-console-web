@@ -8,11 +8,13 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "start:dev": "MONGO_URL=localhost MONGO_PORT=27017 nodemon server/src/server.js"
   },
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "mongoose": "^5.3.4",
     "nodemon": "^1.18.3",
     "react": "16.2.0",
     "react-dom": "16.2.0",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",

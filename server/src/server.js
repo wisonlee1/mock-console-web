@@ -3,8 +3,12 @@ const app = express()
 const webpack = require('webpack')
 const middleware = require('webpack-dev-middleware') // only for auto rebuild
 const hotMiddleware = require('webpack-hot-middleware')
+const mongoose = require('mongoose')
+
 const webpackConfig = require('../../webpack.config')
+
 const compiler = webpack(webpackConfig)
+const { MONGO_URL, MONGO_PORT } = process.env
 
 app.set('views', './pages/')
 app.set('view engine', 'ejs')
@@ -19,9 +23,9 @@ app.use(middleware(compiler, {
 }))
 
 app.use(hotMiddleware(compiler, {
-  'log': false, 
-       'path': '/__webpack_hmr', 
-       'heartbeat': 10 * 1000
+  'log': false,
+  'path': '/__webpack_hmr',
+  'heartbeat': 10 * 1000
 }))
 
 app.get('/api/test1', (req, res, next) => {
@@ -37,6 +41,40 @@ app.get('/api/test1', (req, res, next) => {
 
 app.get('/api/test2', (req, res, next) => {
   res.send('hello2')
+})
+
+mongoose.connect(`mongodb://${MONGO_URL}:${MONGO_PORT}/count`)
+
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.info('Connected to mongodb:', `${MONGO_URL}:${MONGO_PORT}/count`)
+});
+
+const countSchema = new mongoose.Schema({
+  name: String,
+  value: {
+    type: Number,
+    default: 0
+  }
+})
+const Count = mongoose.model('Count', countSchema)
+
+app.get('/api/add', (req, res) => {
+  Count.findOne({ name: 'count' }, (err, obj) => {
+    if (!obj) {
+      const countObj = new Count({ name: 'count' })
+      countObj.save((err, obj) => {
+        res.json(`${countObj.value}`)
+      })
+    } else {
+      obj.set({value: ++obj.value})
+      obj.save((err, obj) => {
+        res.json(`${obj.value}`)
+      })
+    }
+  })
 })
 
 app.get('*', (req, res) => {
