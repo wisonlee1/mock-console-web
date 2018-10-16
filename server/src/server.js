@@ -66,12 +66,12 @@ app.get('/api/add', (req, res) => {
     if (!obj) {
       const countObj = new Count({ name: 'count' })
       countObj.save((err, obj) => {
-        res.json(`${countObj.value}`)
+        res.send(`${countObj.value}`)
       })
     } else {
       obj.set({value: ++obj.value})
       obj.save((err, obj) => {
-        res.json(`${obj.value}`)
+        res.send(`${obj.value}`)
       })
     }
   })
